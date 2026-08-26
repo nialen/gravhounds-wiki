@@ -1,0 +1,30 @@
+# Dependencies and Next.js output
+/node_modules/
+/.next/
+/out/
+/.turbo/
+
+# Local environment and logs
+.env*
+!.env.example
+*.log
+npm-debug.log*
+
+# Raw research pack and source media (kept locally, never committed)
+/keywords.json
+/页面矩阵.md
+/关键词素材.md
+/媒体素材索引.md
+/待用户补充.md
+/素材/
+/品牌与图标素材/
+
+# Local QA runtime artifacts
+/test-results/
+/playwright-report/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
