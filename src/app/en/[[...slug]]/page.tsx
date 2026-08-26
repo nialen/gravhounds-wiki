@@ -29,7 +29,10 @@ function slugFromParams(slug?: string[]) {
 }
 
 export async function generateStaticParams() {
-  return getStaticSlugs().map((slug) => ({ slug: [slug] }));
+  return [
+    { slug: [] as string[] },
+    ...getStaticSlugs().map((slug) => ({ slug: [slug] }))
+  ];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
