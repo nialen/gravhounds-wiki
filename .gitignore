@@ -9,6 +9,7 @@
 !.env.example
 *.log
 npm-debug.log*
+*.tsbuildinfo
 
 # Raw research pack and source media (kept locally, never committed)
 /keywords.json
@@ -22,6 +23,7 @@ npm-debug.log*
 # Local QA runtime artifacts
 /test-results/
 /playwright-report/
+/artifacts/visual/*.png
 
 # OS/editor noise
 .DS_Store

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --surface-0: hsl(218 58% 9%);
+  --surface-1: hsl(216 56% 13%);
+  --surface-2: hsl(214 48% 18%);
+  --text-strong: hsl(45 32% 94%);
+  --text-body: hsl(215 24% 78%);
+  --text-muted: hsl(215 16% 62%);
+  --accent: hsl(188 74% 52%);
+  --accent-ink: hsl(218 58% 9%);
+  --warning: hsl(18 86% 58%);
+  --line: hsl(213 35% 28% / 0.72);
+  --radius: 0.875rem;
+  --content: 78rem;
+  --reading: 68ch;
+  --layer-base: 0;
+  --layer-sticky: 20;
+  --layer-overlay: 40;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--surface-0);
+  color: var(--text-body);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 84% 8%, hsl(188 65% 25% / 0.18), transparent 32rem),
+    var(--surface-0);
+  color: var(--text-body);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.site-container {
+  width: min(calc(100% - 2rem), var(--content));
+  margin-inline: auto;
+}
+
+.reading-width {
+  max-width: var(--reading);
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
