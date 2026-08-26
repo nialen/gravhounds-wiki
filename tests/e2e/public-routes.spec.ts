@@ -44,3 +44,39 @@ test("external footer links disclose a safe browsing relationship", async ({ pag
     await expect(links.nth(index)).toHaveAttribute("rel", /noreferrer/);
   }
 });
+
+test("navigation distinguishes the current page from hover without underlines", async ({ page }) => {
+  await page.goto("/en/gameplay/");
+
+  const current = page.locator(".desktop-nav a", { hasText: "Gameplay" });
+  const hovered = page.locator(".desktop-nav a", { hasText: "Release" });
+
+  await expect(current).toHaveAttribute("aria-current", "page");
+  const activeStyles = await current.evaluate((element) => {
+    const styles = getComputedStyle(element);
+    return {
+      backgroundColor: styles.backgroundColor,
+      textDecorationLine: styles.textDecorationLine
+    };
+  });
+
+  await hovered.hover();
+  await expect
+    .poll(() =>
+      hovered.evaluate((element) => getComputedStyle(element).backgroundColor)
+    )
+    .not.toBe("rgba(0, 0, 0, 0)");
+  const hoverStyles = await hovered.evaluate((element) => {
+    const styles = getComputedStyle(element);
+    return {
+      backgroundColor: styles.backgroundColor,
+      textDecorationLine: styles.textDecorationLine
+    };
+  });
+
+  expect(activeStyles.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
+  expect(hoverStyles.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
+  expect(hoverStyles.backgroundColor).not.toBe(activeStyles.backgroundColor);
+  expect(activeStyles.textDecorationLine).toBe("none");
+  expect(hoverStyles.textDecorationLine).toBe("none");
+});

@@ -403,6 +403,32 @@ a {
   text-decoration: none;
 }
 
+.desktop-nav .nav-link {
+  padding: 0.42rem 0.62rem;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  text-decoration: none;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.desktop-nav .nav-link:hover {
+  border-color: hsl(188 40% 70% / 0.1);
+  background: hsl(188 40% 70% / 0.07);
+  color: var(--text-body);
+  text-decoration: none;
+}
+
+.desktop-nav .nav-link.is-active,
+.desktop-nav .nav-link.is-active:hover {
+  border-color: hsl(188 74% 52% / 0.38);
+  background: hsl(188 74% 52% / 0.14);
+  color: var(--accent);
+  text-decoration: none;
+}
+
 .desktop-nav a:hover,
 .footer-links a:hover,
 .breadcrumbs a:hover,
@@ -442,6 +468,20 @@ a {
   padding: 0.9rem 1rem;
   border-bottom: 1px solid var(--line);
   color: var(--text-strong);
+  text-decoration: none;
+}
+
+.mobile-menu .nav-link:hover {
+  background: hsl(188 40% 70% / 0.07);
+  color: var(--text-body);
+  text-decoration: none;
+}
+
+.mobile-menu .nav-link.is-active,
+.mobile-menu .nav-link.is-active:hover {
+  background: hsl(188 74% 52% / 0.14);
+  box-shadow: inset 3px 0 0 var(--accent);
+  color: var(--accent);
   text-decoration: none;
 }
 

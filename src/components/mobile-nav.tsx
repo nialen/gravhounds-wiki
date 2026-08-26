@@ -1,10 +1,11 @@
 "use client";
 
 import { ListIcon, XIcon } from "@phosphor-icons/react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import type { PageDefinition } from "@/site/page-manifest";
+
+import { NavigationLinks } from "./navigation-links";
 
 interface MobileNavProps {
   pages: PageDefinition[];
@@ -38,15 +39,7 @@ export function MobileNav({ pages }: MobileNavProps) {
       </button>
       {open ? (
         <nav aria-label="Mobile navigation" className="mobile-menu" id="mobile-navigation">
-          {pages.map((page) => (
-            <Link
-              href={page.slug ? `/en/${page.slug}/` : "/en/"}
-              key={page.slug || "home"}
-              onClick={() => setOpen(false)}
-            >
-              {page.navLabel ?? page.title}
-            </Link>
-          ))}
+          <NavigationLinks onNavigate={() => setOpen(false)} pages={pages} />
         </nav>
       ) : null}
     </div>

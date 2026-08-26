@@ -5,6 +5,7 @@ import { publicPages } from "@/site/page-manifest";
 import { siteConfig } from "@/site/site-config";
 
 import { MobileNav } from "./mobile-nav";
+import { NavigationLinks } from "./navigation-links";
 
 const primaryPages = publicPages.filter((page) => page.navLabel);
 
@@ -17,14 +18,7 @@ export function SiteHeader() {
           <span>{siteConfig.shortName}</span>
         </Link>
         <nav aria-label="Primary navigation" className="desktop-nav">
-          {primaryPages.map((page) => (
-            <Link
-              href={page.slug ? `/en/${page.slug}/` : "/en/"}
-              key={page.slug || "home"}
-            >
-              {page.navLabel}
-            </Link>
-          ))}
+          <NavigationLinks pages={primaryPages} />
         </nav>
         <MobileNav pages={primaryPages} />
       </div>
