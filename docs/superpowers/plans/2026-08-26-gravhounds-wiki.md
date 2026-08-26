@@ -83,7 +83,7 @@ Use exact dependency versions:
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
     "gray-matter": "4.0.3",
-    "lucide-react": "1.34.0",
+    "@phosphor-icons/react": "2.1.10",
     "next": "16.3.3",
     "next-mdx-remote": "6.0.0",
     "react": "19.2.8",
@@ -98,9 +98,9 @@ Use exact dependency versions:
     "@types/node": "26.3.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
-    "eslint": "10.9.1",
+    "eslint": "9.39.5",
     "eslint-config-next": "16.3.3",
-    "jsdom": "30.0.1",
+    "jsdom": "29.0.0",
     "postcss": "8.5.26",
     "tsx": "4.23.12",
     "typescript": "5.9.3",
@@ -136,7 +136,7 @@ export interface PageDefinition {
 }
 ```
 
-Create exactly ten `ready` entries for the approved routes and exactly two `deferred` entries for `beginner-guide` and `crossplay`. Export filtered arrays. In `site-config.ts`, set the independent-site name, English locale, base URL from `NEXT_PUBLIC_SITE_URL` with `https://gravhounds.wiki` as the default canonical origin, official links, and `2026-08-26` last-checked date.
+Create exactly ten `ready` entries for the approved routes and exactly two `deferred` entries for `beginner-guide` and `crossplay`. Export filtered arrays. In `site-config.ts`, set the independent-site name, English locale, base URL from `NEXT_PUBLIC_SITE_URL` with `http://localhost:3000` as the local fallback until the user supplies a production domain, official links, and `2026-08-26` last-checked date.
 
 - [ ] **Step 5: Run the focused and base checks**
 
@@ -353,7 +353,7 @@ it("produces ten unique canonical URLs", async () => {
   const pages = await getPublicContent();
   const canonicals = pages.map((page) => canonicalFor(page.slug));
   expect(new Set(canonicals).size).toBe(10);
-  expect(canonicals.every((url) => url.startsWith("https://gravhounds.wiki/en/"))).toBe(true);
+  expect(canonicals.every((url) => url.startsWith("http://localhost:3000/en/"))).toBe(true);
 });
 
 it("keeps descriptions within useful search lengths", async () => {
