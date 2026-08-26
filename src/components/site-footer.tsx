@@ -16,10 +16,10 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="footer-links">
-          <a href={siteConfig.officialLinks.website}>Official site</a>
-          <a href={siteConfig.officialLinks.steam}>Steam</a>
-          <a href={siteConfig.officialLinks.xbox}>Xbox</a>
-          <a href={siteConfig.officialLinks.discord}>Discord</a>
+          <a href={siteConfig.officialLinks.website} rel="noreferrer" target="_blank">Official site</a>
+          <a href={siteConfig.officialLinks.steam} rel="noreferrer" target="_blank">Steam</a>
+          <a href={siteConfig.officialLinks.xbox} rel="noreferrer" target="_blank">Xbox</a>
+          <a href={siteConfig.officialLinks.discord} rel="noreferrer" target="_blank">Discord</a>
         </div>
       </div>
     </footer>

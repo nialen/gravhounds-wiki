@@ -15,6 +15,7 @@ import {
   getContentBySlug,
   getStaticSlugs
 } from "@/content/loader";
+import { mdxOptions } from "@/content/mdx-options";
 import { publicPages } from "@/site/page-manifest";
 import { siteConfig } from "@/site/site-config";
 import { videoGameJsonLd, websiteJsonLd } from "@/site/structured-data";
@@ -94,6 +95,7 @@ export default async function EnglishContentPage({ params }: PageProps) {
           <div className="mdx-content">
             <MDXRemote
               components={{ FactGrid, Hero, ResponsiveTable, StatusCallout, TableOfContents }}
+              options={{ mdxOptions }}
               source={content.body}
             />
           </div>

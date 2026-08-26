@@ -23,7 +23,6 @@ npm-debug.log*
 # Local QA runtime artifacts
 /test-results/
 /playwright-report/
-/artifacts/visual/*.png
 
 # OS/editor noise
 .DS_Store
