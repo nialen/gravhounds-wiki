@@ -4,14 +4,20 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { EvidenceBadge } from "@/components/evidence-badge";
+import { FactGrid } from "@/components/fact-grid";
+import { Hero } from "@/components/hero";
 import { RelatedPages } from "@/components/related-pages";
+import { ResponsiveTable } from "@/components/responsive-table";
 import { SourceList } from "@/components/source-list";
+import { StatusCallout } from "@/components/status-callout";
+import { TableOfContents } from "@/components/table-of-contents";
 import {
   getContentBySlug,
   getStaticSlugs
 } from "@/content/loader";
 import { publicPages } from "@/site/page-manifest";
 import { siteConfig } from "@/site/site-config";
+import { videoGameJsonLd, websiteJsonLd } from "@/site/structured-data";
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
@@ -63,9 +69,17 @@ export default async function EnglishContentPage({ params }: PageProps) {
   if (!content) notFound();
 
   const isHome = slug === "";
+  const structuredData = isHome ? [websiteJsonLd(), videoGameJsonLd()] : [videoGameJsonLd()];
 
   return (
     <main>
+      {structuredData.map((data) => (
+        <script
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+          key={data["@type"]}
+          type="application/ld+json"
+        />
+      ))}
       <article className={isHome ? "home-page" : "article-page"}>
         {!isHome ? (
           <div className="site-container article-header">
@@ -78,7 +92,10 @@ export default async function EnglishContentPage({ params }: PageProps) {
         ) : null}
         <div className={isHome ? undefined : "site-container article-layout"}>
           <div className="mdx-content">
-            <MDXRemote source={content.body} />
+            <MDXRemote
+              components={{ FactGrid, Hero, ResponsiveTable, StatusCallout, TableOfContents }}
+              source={content.body}
+            />
           </div>
           {!isHome ? (
             <>
