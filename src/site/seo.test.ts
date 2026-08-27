@@ -1,17 +1,29 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { getPublicContent } from "@/content/loader";
 
-import { canonicalFor, videoGameJsonLd } from "./structured-data";
+const originalSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+afterEach(() => {
+  if (originalSiteUrl) {
+    process.env.NEXT_PUBLIC_SITE_URL = originalSiteUrl;
+  } else {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  vi.resetModules();
+});
 
 describe("SEO content contract", () => {
   it("produces ten unique canonical URLs", async () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://example.test";
+    vi.resetModules();
+    const { canonicalFor } = await import("./structured-data");
     const pages = await getPublicContent();
     const canonicals = pages.map((page) => canonicalFor(page.frontmatter.slug));
 
     expect(pages).toHaveLength(10);
     expect(new Set(canonicals).size).toBe(10);
-    expect(canonicals.every((url) => url.startsWith("http://localhost:3000/en/"))).toBe(true);
+    expect(canonicals.every((url) => url.startsWith("https://example.test/en/"))).toBe(true);
   });
 
   it("keeps descriptions within useful search lengths", async () => {
@@ -21,7 +33,8 @@ describe("SEO content contract", () => {
     }
   });
 
-  it("keeps JSON-LD to confirmed game facts", () => {
+  it("keeps JSON-LD to confirmed game facts", async () => {
+    const { videoGameJsonLd } = await import("./structured-data");
     const data = videoGameJsonLd();
 
     expect(data.gamePlatform).toEqual(["Windows PC", "Xbox Series X|S"]);
